@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample App</title>
+</head>
+<body>
+  <h2>ユーザー追加</h2>
+  <form method="post" action="/new">
+    <p>名前<input type="text" name="name" size="30" placeholder="入力してください" required></p>
+    <p>名前(漢字)<input type="text" name="name_kanji" size="30" placeholder="入力してください" required></p>
+    <p>パスワード<input type="password" name="password" size="30" value="1" required></p>
+    <p>メッセージ<input type="text" name="message" size="30" placeholder="入力してください" required></p>
+    <p><input type="submit" value="Send"></p>
+  </form>
+
+  <h2>ユーザー一覧</h2>
+  <table>
+    <tr>
+      <td>名前</td>
+      <td>名前(漢字)</td>
+      <td>メッセージ</td>
+      <td>パスワード</td>
+    </tr>
+    {{ range .result }}
+      <tr>
+        <td>{{ .Name }}</td>
+        <td>{{ .NameKanji }}</td>
+        <td>{{ .Message }}</td>
+        <td>{{ .Password }}</td>
+        <td>
+          <form method="get" action="/delete/{{.ID}}">
+            <button type="submit">削除</button>
+          </form>
+        </td>
+      </tr>
+    {{ end }}
+  </ul>
+  </body>
+</html>

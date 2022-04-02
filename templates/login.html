@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+</head>
+    <body>
+        <div class="login_form_top">
+            <h1>ログインページ</h1>
+            <p>お名前をスペースなしのひらがなでご入力ください。</p>
+            <p>例：おおくまけいすけ</p>    
+        </div>
+        <form method="post" action="/login">
+            <p>名前<input type="text" name="name" size="30" placeholder="入力してください" ></p>
+            <p>パスワード<input type="text" name="password" size="30" placeholder="入力してください" ></p>
+            <p><input type="submit" value="Send"></p>
+        </form>
+    </body>
+</html>
