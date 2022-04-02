@@ -45,8 +45,8 @@ func main() {
 			return
 		}
 		ctx.HTML(200, "message.html", gin.H{
-			"name":    user.NameKanji,
-			"message": user.Message,
+			"name_kanji": user.NameKanji,
+			"message":    user.Message,
 		})
 	})
 
