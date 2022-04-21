@@ -2,16 +2,26 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Sample App</title>
+    <link rel="stylesheet" href="../assets/message.css" >
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+    <title>message</title>
 </head>
     <body>
-        <h1>{{ .name_kanji }}さま</h1>
-        <div>
+        <div class="header">
+            <img src="../assets/message_top.png">
+        </header>
+        <div class="contents">
+            <h1>{{ .name_kanji }}さま</h1>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/vdxoDyNAoH0?loop=1&playlist=vdxoDyNAoH0&autoplay=1&mute=1&rel=0&modestbranding=1"frameborder="0" allowfullscreen>
             </iframe>
+            <img src="../assets/message_center.png">
+            <p>{{ .message }}<br>
+                今日は遠くから来てくれてありがとう<br>
+                ご多用中のところご列席いただきありがとうございます。
+            </p>
         </div>
-        <p>{{ .message }}<br>
-            今日は遠くから来てくれてありがとう<br>
-            ご多用中のところご列席いただきありがとうございます</p>
+        <div class="footer">
+            <img src="../assets/message_bottom.png">
+        </footer>
     </body>
 </html>

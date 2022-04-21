@@ -25,7 +25,7 @@ func main() {
 	defer db.Close()
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
-	router.Static("img", "./img")
+	router.Static("/assets", "./assets")
 
 	// indexページ
 	router.GET("/", func(ctx *gin.Context) {
@@ -33,7 +33,7 @@ func main() {
 	})
 
 	// loginページ
-	router.POST("/login", func(ctx *gin.Context) {
+	router.POST("/message", func(ctx *gin.Context) {
 		db := sqlConnect()
 		defer db.Close()
 		name := ctx.PostForm("name")
