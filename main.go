@@ -51,7 +51,7 @@ func main() {
 	})
 
 	// 編集ページ
-	router.GET("/edit", func(ctx *gin.Context) {
+	router.GET("/edit3160", func(ctx *gin.Context) {
 		db := sqlConnect()
 		defer db.Close()
 		var users []User
@@ -60,6 +60,22 @@ func main() {
 		ctx.HTML(200, "edit.html", gin.H{
 			"result": users,
 		})
+	})
+
+	// 編集ページ
+	router.POST("/update", func(ctx *gin.Context) {
+		fmt.Println("hello")
+		db := sqlConnect()
+		defer db.Close()
+
+		name := ctx.PostForm("name")
+		name_kanji := ctx.PostForm("name_kanji")
+		password := ctx.PostForm("password")
+		message := ctx.PostForm("message")
+
+		db.Update(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message})
+
+		ctx.Redirect(302, "/edit3160")
 	})
 
 	router.POST("/new", func(ctx *gin.Context) {
@@ -72,7 +88,7 @@ func main() {
 		message := ctx.PostForm("message")
 		db.Create(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message})
 
-		ctx.Redirect(302, "/edit")
+		ctx.Redirect(302, "/edit3160")
 	})
 
 	router.GET("/delete/:id", func(ctx *gin.Context) {
@@ -93,7 +109,7 @@ func main() {
 		}
 		defer db.Close()
 
-		ctx.Redirect(302, "/edit")
+		ctx.Redirect(302, "/edit3160")
 	})
 
 	router.Run()
