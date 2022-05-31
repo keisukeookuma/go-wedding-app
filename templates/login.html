@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ログイン</title>
+    <title>大熊＆川下結婚式</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/login.css" >
 </head>
     <body>
-        <div class="login_form_top">
-            <h1>ログインページ</h1>
-            <p>お名前をスペースなしのひらがなでご入力ください。</p>
-            <p>例：おおくまけいすけ</p>    
+        <div class="container text-center">
+            <h1 class="title">Thanks!</h1>
+            <img src="../assets/login.jpeg" class="rounded mx-auto d-block" width="200">
+            <form method="post" action="/message">
+                <div class="form-group form-input">
+                    <label class="name-explain">お名前をスペースなしのひらがなでご入力ください。</label>
+                    <input type="text" name="name" class="form-control" aria-describedby="emailHelp" placeholder="例：おおくまけいすけ">
+                </div>
+                <input type="hidden" name="password" class="form-control" value="1">
+                <button type="submit" class="btn btn-primary">開く</button>
+            </form>
         </div>
-        <form method="post" action="/message">
-            <p>名前<input type="text" name="name" size="30" placeholder="入力してください" ></p>
-            <p>パスワード<input type="text" name="password" size="30" value="1" ></p>
-            <p><input type="submit" value="Send"></p>
-        </form>
     </body>
 </html>

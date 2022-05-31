@@ -13,10 +13,11 @@ import (
 
 type User struct {
 	gorm.Model
-	Name      string `gorm:"unique"`
-	NameKanji string
-	Password  string
-	Message   string
+	Name          string `gorm:"unique"`
+	OrganizerName string
+	NameKanji     string
+	Password      string
+	Message       string
 }
 
 func main() {
@@ -45,8 +46,9 @@ func main() {
 			return
 		}
 		ctx.HTML(200, "message.html", gin.H{
-			"name_kanji": user.NameKanji,
-			"message":    user.Message,
+			"name_kanji":     user.NameKanji,
+			"message":        user.Message,
+			"organizer_name": user.OrganizerName,
 		})
 	})
 
@@ -68,12 +70,14 @@ func main() {
 		db := sqlConnect()
 		defer db.Close()
 
+		id := ctx.PostForm("id")
 		name := ctx.PostForm("name")
 		name_kanji := ctx.PostForm("name_kanji")
 		password := ctx.PostForm("password")
 		message := ctx.PostForm("message")
 
-		db.Update(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message})
+		db.Model(&User{}).Where("id = ?", id).Update(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message})
+		// db.Update(&User{ID: id, Name: name, NameKanji: name_kanji, Password: password, Message: message})
 
 		ctx.Redirect(302, "/edit3160")
 	})
@@ -86,7 +90,8 @@ func main() {
 		name_kanji := ctx.PostForm("name_kanji")
 		password := ctx.PostForm("password")
 		message := ctx.PostForm("message")
-		db.Create(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message})
+		organizer_name := ctx.PostForm("organizer_name")
+		db.Create(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message, OrganizerName: organizer_name})
 
 		ctx.Redirect(302, "/edit3160")
 	})

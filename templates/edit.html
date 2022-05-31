@@ -7,10 +7,13 @@
 <body>
   <h2>ユーザー追加</h2>
   <form method="post" action="/new">
-    <p>名前</p>
+    <p>名前(ひらがな)</p>
     <input type="text" name="name" size="30" placeholder="入力してください" required>
-    <p>名前(漢字)</p>
+    <p>呼び名(様などが必要な場合は末尾につけること)</p>
     <input type="text" name="name_kanji" size="30" placeholder="入力してください" required>
+    <p>新郎or新婦</p>
+    <input type="radio" name="organizer_name" value="啓輔">啓輔
+    <input type="radio" name="organizer_name" value="槻歩" checked>槻歩
     <p>パスワード</p>
     <input type="password" name="password" size="30" value="1" required>
     <p>メッセージ</p>
@@ -21,8 +24,9 @@
   <h2>ユーザー一覧</h2>
   <table border="1">
     <tr>
-      <td>名前</td>
-      <td>名前(漢字)</td>
+      <td>名前(ひらがな)</td>
+      <td>呼び名</td>
+      <td>新郎or新婦</td>
       <td>メッセージ</td>
       <td>パスワード</td>
       <td>編集</td>
@@ -31,8 +35,12 @@
     {{ range .result }}
       <tr>
         <form id="edit{{.ID}}" action="/update" method="post">
+          <input type="hidden" name="id" value="{{ .ID }}">
           <td><input type="text" name="name" value="{{ .Name }}"></td>
           <td><input type="text" name="name_kanji" value="{{ .NameKanji }}"></td>
+          <td>
+            "{{ .OrganizerName }}"
+          </td>
           <td><textarea name="message" rows="4" cols="30" required>{{ .Message }}</textarea></td>
           <!-- <td><input type="text" name="message" value="{{ .Message }}"></td> -->
           <td><input type="text" name="password" value="{{ .Password }}"></td>

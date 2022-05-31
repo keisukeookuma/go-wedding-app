@@ -2,26 +2,31 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/message.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
     <title>message</title>
 </head>
     <body>
-        <div class="header">
-            <img src="../assets/message_top.png">
-        </header>
-        <div class="contents">
-            <h1>{{ .name_kanji }}さま</h1>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/vdxoDyNAoH0?loop=1&playlist=vdxoDyNAoH0&autoplay=1&mute=1&rel=0&modestbranding=1"frameborder="0" allowfullscreen>
-            </iframe>
-            <img src="../assets/message_center.png">
-            <p>{{ .message }}<br>
-                今日は遠くから来てくれてありがとう<br>
-                ご多用中のところご列席いただきありがとうございます。
-            </p>
+        <div class="header-photo">
+            <h1>Thanks for coming</h1>
+            <img src="../assets/message_photo.jpg">
         </div>
-        <div class="footer">
-            <img src="../assets/message_bottom.png">
-        </footer>
+        <div class="contents-message d-flex justify-content-center">
+            <div class="message d-flex flex-column align-self-center">
+                <!-- <div class="d-flex flex-column align-self-start"> -->
+                    <p class="name">{{ .name_kanji }} へ</p>
+                <!-- </div> -->
+                <p class="text">{{ .message }}</p>
+                
+                <p class="organizer_name">{{ .organizer_name }}</p>
+            </div>
+            <div class="message-leaf">
+                <img src="../assets/message_leaf.png">
+            </div>
+        </div>
     </body>
 </html>

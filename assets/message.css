@@ -4,7 +4,7 @@ body{
     /* background-position: center;
     background-repeat: no-repeat;
     background-size: contain; */
-    background-color:  rgb(255, 252, 241);
+    background-color: rgb(245, 233, 219);
 }
 .header .footer{
     height: 100%;
@@ -15,29 +15,63 @@ body{
 .header img, .footer img{
     width: 380px;
 }
-.contents {
-    margin:0 20px;
+.header-photo {
+    margin: 10px auto;
 }
-.contents img {
-    height: 40px;
-    width: auto;
+.header-photo img {
+    width: 360px;
+    height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 h1{
+    font-family: 'Parisienne', cursive;
+    font-weight: 100;
     text-align: center;
     margin: 0 auto;
+    color: rgb(81, 96, 77);
 }
 p{
     text-align: left;
     margin: 0 20px;
+    color: rgb(81, 96, 77);
 }
-iframe{
-    width: 300px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    /* max-width: 100%; */
+
+.contents-message {
+    height: 250px;
+}
+
+.message {
+    width: 200px;
+    font-size: 14px;
+    font-family: serif;
+}
+
+.organizer_name {
+    text-align: right;
+}
+
+.name {
+    text-align: left;
+}
+
+
+.text {
+    white-space: pre-line;
+}
+.message p{
+    margin: 5px;
+}
+
+.message-leaf {
+    width: 160px;
+    position: relative;
+}
+
+.message-leaf img{
+    width: 160px;
+    position: absolute;
+    bottom: 0;
 }
 
 @media screen and (min-width: 481px) {
