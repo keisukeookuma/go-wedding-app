@@ -1,4 +1,4 @@
 gin-bin
-# docker-compose.yml
-# Dockerfile
-# Dockerfile.prod
+docker-compose.yml
+Dockerfile
+Dockerfile.prod
