@@ -2,25 +2,37 @@ body{
     font-family: serif;
 }
 .container {
-    width: 700px;
+    width: 580px;
 }
 .title {
     margin-top: 200px;
-    font-size: 150px;
+    font-size: 100px;
     font-family: cursive;
 }
 
 .form-input {
     padding-top: 20px;
     padding-bottom: 20px;
-    width: 600px;
+    width: 500px;
     margin: 0 auto;
 }
 
 img {
-    width:500px;
+    width:480px;
 }
 
-.font24 {
-    font-size: 24px;
+.font-text {
+    font-size: 20px;
+}
+
+.btn {
+    width: 500px;
+}
+
+
+@media screen and (min-width: 481px) {
+	/* 481px以上に適用されるCSS（タブレット用） */
+}
+@media screen and (min-width: 960px) {
+	/* 960px以上に適用されるCSS（PC用） */
 }
