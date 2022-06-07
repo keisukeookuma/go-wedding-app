@@ -53,7 +53,7 @@ func main() {
 	})
 
 	// 編集ページ
-	router.GET("/edit3160", func(ctx *gin.Context) {
+	router.GET("/edit_3160k", func(ctx *gin.Context) {
 		db := sqlConnect()
 		defer db.Close()
 		var users []User
@@ -79,7 +79,7 @@ func main() {
 		db.Model(&User{}).Where("id = ?", id).Update(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message})
 		// db.Update(&User{ID: id, Name: name, NameKanji: name_kanji, Password: password, Message: message})
 
-		ctx.Redirect(302, "/edit3160")
+		ctx.Redirect(302, "/edit_3160k")
 	})
 
 	router.POST("/new", func(ctx *gin.Context) {
@@ -93,7 +93,7 @@ func main() {
 		organizer_name := ctx.PostForm("organizer_name")
 		db.Create(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message, OrganizerName: organizer_name})
 
-		ctx.Redirect(302, "/edit3160")
+		ctx.Redirect(302, "/edit_3160k")
 	})
 
 	router.GET("/delete/:id", func(ctx *gin.Context) {
@@ -122,10 +122,10 @@ func main() {
 
 func sqlConnect() (database *gorm.DB) {
 	DBMS := "mysql"
-	USER := "go_test"
-	PASS := "password"
+	USER := "go_wedding_user"
+	PASS := "go_wedding_pass_kkd"
 	PROTOCOL := "tcp(db:3306)"
-	DBNAME := "go_database"
+	DBNAME := "go_wedding_db"
 
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"
 
