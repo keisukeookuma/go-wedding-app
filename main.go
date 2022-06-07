@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"github.com/joho/godotenv"
 )
 
 type User struct {
@@ -28,9 +31,15 @@ func main() {
 	router.LoadHTMLGlob("templates/*.html")
 	router.Static("/assets", "./assets")
 
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("env読み込み失敗")
+	}
 	// indexページ
 	router.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(200, "login.html", gin.H{})
+		ctx.HTML(200, "login.html", gin.H{
+			"error": "",
+		})
 	})
 
 	// loginページ
@@ -42,7 +51,9 @@ func main() {
 		var user User
 		err := db.Where("name = ? AND password = ?", name, password).Find(&user).Error
 		if err != nil {
-			ctx.String(http.StatusBadRequest, "名前もしくはパスワードが間違っています。%s", err)
+			ctx.HTML(200, "login.html", gin.H{
+				"error": "false",
+			})
 			return
 		}
 		ctx.HTML(200, "message.html", gin.H{
@@ -121,11 +132,12 @@ func main() {
 }
 
 func sqlConnect() (database *gorm.DB) {
-	DBMS := "mysql"
-	USER := "go_wedding_user"
-	PASS := "go_wedding_pass_kkd"
+	DBMS := os.Getenv("DB_MS")
+	USER := os.Getenv("DB_USER")
+	PASS := os.Getenv("DB_PASS")
 	PROTOCOL := "tcp(db:3306)"
-	DBNAME := "go_wedding_db"
+	DBNAME := os.Getenv("DB_NAME")
+	fmt.Println(PASS)
 
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"
 

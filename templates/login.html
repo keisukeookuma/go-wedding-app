@@ -11,6 +11,11 @@
             <h1 class="title">Thanks!</h1>
             <img src="../assets/login.jpeg" class="rounded mx-auto d-block">
             <form method="post" action="/message">
+                {{ if eq .error "false" }}
+                <div class="alert alert-danger mt-1" role="alert">
+                    お名前が間違っています。
+                </div>
+                {{ end }}
                 <div class="form-group form-input name-input">
                     <label class="font-text">お名前をスペースなしのひらがなでご入力ください。</label>
                     <input type="text" name="name" class="form-control font-text" aria-describedby="emailHelp" placeholder="例：おおくまけいすけ">
