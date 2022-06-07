@@ -27,8 +27,9 @@ body{
 h1{
     font-family: 'Parisienne', cursive;
     font-weight: 100;
+    font-size: 45px;
     text-align: center;
-    margin: 0 auto;
+    margin: 20px auto;
     color: rgb(81, 96, 77);
 }
 p{
