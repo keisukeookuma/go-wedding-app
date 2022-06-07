@@ -24,6 +24,10 @@ type User struct {
 }
 
 func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("env読み込み失敗")
+	}
 	db := sqlConnect()
 	db.AutoMigrate(&User{})
 	defer db.Close()
@@ -31,10 +35,6 @@ func main() {
 	router.LoadHTMLGlob("templates/*.html")
 	router.Static("/assets", "./assets")
 
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatal("env読み込み失敗")
-	}
 	// indexページ
 	router.GET("/", func(ctx *gin.Context) {
 		ctx.HTML(200, "login.html", gin.H{
