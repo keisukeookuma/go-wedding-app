@@ -87,9 +87,12 @@ func main() {
 		password := ctx.PostForm("password")
 		message := ctx.PostForm("message")
 
-		db.Model(&User{}).Where("id = ?", id).Update(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message})
-		// db.Update(&User{ID: id, Name: name, NameKanji: name_kanji, Password: password, Message: message})
-
+		err := db.Model(&User{}).Where("id = ?", id).Update(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message}).Error
+		if err != nil {
+			ctx.String(
+				200, "ユーザー編集失敗：%v", err,
+			)
+		}
 		ctx.Redirect(302, "/edit_3160k")
 	})
 
@@ -102,8 +105,12 @@ func main() {
 		password := ctx.PostForm("password")
 		message := ctx.PostForm("message")
 		organizer_name := ctx.PostForm("organizer_name")
-		db.Create(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message, OrganizerName: organizer_name})
-
+		err := db.Create(&User{Name: name, NameKanji: name_kanji, Password: password, Message: message, OrganizerName: organizer_name}).Error
+		if err != nil {
+			ctx.String(
+				200, "ユーザー作成失敗：%v", err,
+			)
+		}
 		ctx.Redirect(302, "/edit_3160k")
 	})
 
@@ -116,16 +123,17 @@ func main() {
 		}
 		var user User
 		err = db.First(&user, id).Error
+		fmt.Println(user)
 		if err != nil {
-			ctx.String(http.StatusBadRequest, "取得失敗：%s", err)
+			log.Print(http.StatusBadRequest, "取得失敗：%s", err)
 		}
-		err = db.Delete(&user).Error
+		err = db.Unscoped().Delete(&user).Error
 		if err != nil {
-			ctx.String(http.StatusBadRequest, "削除失敗：%s", err)
+			log.Print(http.StatusBadRequest, "削除失敗：%s", err)
 		}
 		defer db.Close()
 
-		ctx.Redirect(302, "/edit3160")
+		ctx.Redirect(302, "/edit_3160k")
 	})
 
 	router.Run()
@@ -137,7 +145,6 @@ func sqlConnect() (database *gorm.DB) {
 	PASS := os.Getenv("DB_PASS")
 	PROTOCOL := "tcp(db:3306)"
 	DBNAME := os.Getenv("DB_NAME")
-	fmt.Println(PASS)
 
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"
 
