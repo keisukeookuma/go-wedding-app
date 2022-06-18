@@ -47,7 +47,9 @@
         </form>
         <td><button form="edit{{.ID}}" type="submit">編集</button></td>
         <td>
-          <form method="get" action="/delete/{{.ID}}">
+          <form method="post" action="/delete_kassi">
+            <input type="hidden" name="id" value="{{.ID}}">
+            <input type="hidden" name="pass" value="kkdai">
             <button type="submit">削除</button>
           </form>
         </td>

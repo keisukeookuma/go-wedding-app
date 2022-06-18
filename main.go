@@ -64,7 +64,7 @@ func main() {
 	})
 
 	// 編集ページ
-	router.GET("/edit_3160k", func(ctx *gin.Context) {
+	router.GET("/edit_3160ktsia", func(ctx *gin.Context) {
 		db := sqlConnect()
 		defer db.Close()
 		var users []User
@@ -93,7 +93,7 @@ func main() {
 				200, "ユーザー編集失敗：%v", err,
 			)
 		}
-		ctx.Redirect(302, "/edit_3160k")
+		ctx.Redirect(302, "/edit_3160ktsia")
 	})
 
 	router.POST("/new", func(ctx *gin.Context) {
@@ -111,15 +111,23 @@ func main() {
 				200, "ユーザー作成失敗：%v", err,
 			)
 		}
-		ctx.Redirect(302, "/edit_3160k")
+		ctx.Redirect(302, "/edit_3160ktsia")
 	})
 
-	router.GET("/delete/:id", func(ctx *gin.Context) {
+	router.POST("/delete_kassi", func(ctx *gin.Context) {
 		db := sqlConnect()
-		n := ctx.Param("id")
+		n := ctx.PostForm("id")
+		p := ctx.PostForm("pass")
+		if p != "kkdai" {
+			ctx.String(
+				200, "ユーザー削除失敗：%v", err,
+			)
+		}
 		id, err := strconv.Atoi(n)
 		if err != nil {
-			panic("id is not a number")
+			ctx.String(
+				200, "ユーザー削除失敗：%v", err,
+			)
 		}
 		var user User
 		err = db.First(&user, id).Error
@@ -133,7 +141,7 @@ func main() {
 		}
 		defer db.Close()
 
-		ctx.Redirect(302, "/edit_3160k")
+		ctx.Redirect(302, "/edit_3160ktsia")
 	})
 
 	router.Run()
