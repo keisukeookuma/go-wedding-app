@@ -2,7 +2,8 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
+    commands:
+      - yum install -y git
       java: corretto11
   pre_build:
     commands:
