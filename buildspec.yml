@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - yum install -y git
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+      - ls -la
+      - docker-compose up -d
+  post_build:
+    commands:
+      - echo Build completed on `date`
