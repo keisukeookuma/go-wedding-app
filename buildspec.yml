@@ -11,7 +11,7 @@ phases:
     commands:
       - echo Build started on `date`
       - ls -la
-      # - docker-compose up -d
+      - docker-compose up -d
   post_build:
     commands:
       - echo Build completed on `date`
